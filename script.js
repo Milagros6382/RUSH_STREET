@@ -67,7 +67,7 @@ const productos = [
         nombre: "Buzo BOXY",
         precio: "$20.000",
         imagenes: [
-            "productos/producto-04-buzo-boxy/buzo-boxy-crema.jpeg",
+           "productos/producto-04-buzo-boxy/buzo-boxy-amarillo-tribal.jpeg",
             "productos/producto-04-buzo-boxy/buzo-boxy-gris.jpeg",
             "productos/producto-04-buzo-boxy/buzo-boxy-negro-cruz.jpeg",
             "productos/producto-04-buzo-boxy/buzo-boxy-negro-tribal-01.jpeg",
