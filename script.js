@@ -1,3 +1,19 @@
+
+
+/* ==================================
+    SUPABASE
+================================== */
+
+const supabase_url = "https://yhtpqkszpfibsesbrefl.supabase.co";
+const supabase_anon_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlodHBxa3N6cGZpYnNlc2JyZWZsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk5OTM3NjQsImV4cCI6MjEwNTU2OTc2NH0.t6O_xtQvuHKQ3ey73CFjELX7rymg27SELzcT07bnZd8";
+
+const supabase = window.supabase.createClient(
+    supabase_url,
+    supabase_anon_key
+);
+
+
+
 /* ==================================
     PRODUCTOS
 ================================== */
