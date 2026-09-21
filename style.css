@@ -1,5 +1,5 @@
 /* =========================================
-   PALETA
+    PALETA
 ========================================= */
 
 
@@ -26,7 +26,7 @@
 
 
 /* =========================================
-   RESET
+    RESET
 ========================================= */
 
 
@@ -70,7 +70,7 @@ body.modal-open {
 
 
 /* =========================================
-   BARRA SUPERIOR
+    BARRA SUPERIOR
 ========================================= */
 
 
@@ -112,10 +112,8 @@ body.modal-open {
 
 
 
-
-
 /* =========================================
-   HEADER
+    HEADER
 ========================================= */
 
 
@@ -230,30 +228,6 @@ nav {
 
 
 
-
-.logo {
-
-
-    font-size: 18px;
-
-
-    font-weight: 900;
-
-
-    letter-spacing: 4px;
-
-
-    border: 1px solid white;
-
-
-    padding: 7px 10px;
-
-
-}
-
-
-
-
 .menu {
 
 
@@ -323,7 +297,7 @@ nav {
 
 
 /* =========================================
-   HERO
+    HERO
 ========================================= */
 
 
@@ -339,7 +313,32 @@ nav {
 }
 
 
+/*LOGO y ANIMACIÓN*/
+.logo {
+    display: inline-block;
+    padding: 7px 10px;
+    width: 70%;
+    animation: logo-float 2s ease-in-out infinite;
+}
 
+@keyframes logo-float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .logo {
+        animation: none;
+    }
+}
+
+/*No se usa el título*/
 
 .hero h1 {
 
@@ -390,7 +389,7 @@ nav {
 
 
     font-size: 12px;
-
+    font-weight: 900;
 
     letter-spacing: 4px;
 
@@ -533,82 +532,36 @@ nav {
 
 
 
-/* =========================================
-   CATALOGO
-========================================= */
 
 
 .catalog {
-    max-width: 1400px;
-    margin: 0 auto 100px;
-    padding: 0 30px;
-
-
+    width: min(1400px, calc(100% - 60px));
+    margin: 0 auto;
+    padding: 0 0 70px;
     display: grid;
-
-
-    grid-template-columns: repeat(3, 1fr);
-
-
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
 }
 
 
-
-
-
-
-/* =========================================
-   TARJETAS
-========================================= */
-
-
 .product-card {
-
-
-    background:
-        var(--black-card);
-
-
-    border:
-        1px solid white;
-
-
-    cursor: pointer;
-
-
+    display: flex;
+    flex-direction: column;
+    background: var(--black-card);
+    border: 1px solid white;
     overflow: hidden;
-
-
     position: relative;
-
-
     transition:
         transform 0.25s,
         border-color 0.25s,
         box-shadow 0.25s;
-
-
 }
 
 
-
-
 .product-card:hover {
-
-
-    transform:
-        translateY(-7px);
-
-
-    border-color:
-        var(--red);
-
-
-    box-shadow:
-        6px 6px 0 var(--red);
-
-
+    transform: translateY(-7px);
+    border-color: var(--red);
+    box-shadow: 6px 6px 0 var(--red);
 }
 
 
@@ -685,50 +638,6 @@ nav {
 
 
 
-/* =========================================
-   TAG PRODUCTO
-========================================= */
-
-
-.card-tag {
-
-
-    position: absolute;
-
-
-    top: 12px;
-
-
-    left: 12px;
-
-
-    background:
-        var(--red);
-
-
-    color: white;
-
-
-    padding:
-        6px 8px;
-
-
-    border:
-        1px solid white;
-
-
-    font-size: 8px;
-
-
-    font-weight: 900;
-
-
-    letter-spacing: 1px;
-
-
-}
-
-
 .card-colors {
     position: absolute;
     top: 12px;
@@ -748,6 +657,19 @@ nav {
 
 
 /* =========================================
+.catalog {
+    width: min(1400px, calc(100% - 60px));
+    margin: 0 auto;
+    padding: 0 0 70px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+
+
+
+
    VER PRODUCTO
 ========================================= */
 
@@ -1292,7 +1214,7 @@ nav {
 
 .color-options {
     position: absolute;
-    top: 50%;
+    top: 8%;
     left: 16px;
     z-index: 3;
     display: flex;
@@ -1301,7 +1223,6 @@ nav {
     padding: 10px 8px;
     background: rgba(5, 5, 5, 0.82);
     border: 1px solid white;
-    transform: translateY(-50%);
 }
 
 
