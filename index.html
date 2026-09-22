@@ -6,10 +6,10 @@
     <title>RUSH | Streetwear</title>
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
-    <!-- SUPABASE no se si este link es el correcto-->
+    <!-- SUPABASE no se si este link es el correcto, es el link para cargar la biblioteca-->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-</head>
+
 <body>
     <!-- =========================
         BARRA SUPERIOR
@@ -141,7 +141,11 @@
         <p>MADE FOR THE STREETS /// ARGENTINA</p>
     </footer>
 
-    <!-- JavaScript externo: contiene el catalogo, modal, carrito y WhatsApp. -->
-    <script src="script.js"></script>
+    <!--
+        script.js es el archivo JavaScript externo.
+        ?v=4 no forma parte del nombre: solo fuerza al navegador a cargar
+        una version nueva y evitar que use una copia guardada en cache.
+    -->
+    <script src="script.js?v=4"></script>
 </body>
 </html>

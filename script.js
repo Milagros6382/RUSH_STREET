@@ -1,4 +1,5 @@
-
+(() => {
+console.log("SCRIPT.JS SE ESTÁ EJECUTANDO");
 
 /* ==================================
     SUPABASE
@@ -13,110 +14,11 @@ const supabase = window.supabase.createClient(
 );
 
 
-
-/* ==================================
-    PRODUCTOS
-================================== */
-
-// Fuente de datos del catalogo. Cada objeto representa un producto y
-// contiene todo lo necesario para mostrarlo en la tarjeta y en el modal.
-// Las posiciones del array imagenes se relacionan con las posiciones
-// indicadas en colores.imagenes para filtrar la galeria por color.
-const productos = [
-    {
-        id: 1,
-        nombre: "Boxy fit",
-        precio: "$15.000",
-        imagenes: [
-            "productos/remera-boxy/remera-boxy-blanca-frente.jpeg",
-            "productos/remera-boxy/remera-boxy-blanca-diseno.jpeg",
-            "productos/remera-boxy/remera-boxy-blanca-espalda.jpeg",
-            "productos/remera-boxy/remera-boxy-blanca-vermont.jpeg",
-            "productos/remera-boxy/remera-boxy-gris.jpeg",
-            "productos/remera-boxy/remera-boxy-negra-chaotic.jpeg",
-            "productos/remera-boxy/remera-boxy-negra-frente.jpeg",
-            "productos/remera-boxy/remera-boxy-negra-espalda.jpeg",
-            "productos/remera-boxy/remera-boxy-negra-vermont-02.jpeg",
-            "productos/remera-boxy/remera-boxy-marron-vermont.jpeg",
-            "productos/remera-boxy/remera-boxy-marron-frente.jpeg",
-            "productos/remera-boxy/remera-boxy-marron-espalda.jpeg",
-        ],
-        colores: [
-            { nombre: "Blanco", codigo: "#f2f2f2", imagenes: [0, 1, 2, 3] },
-            { nombre: "Gris", codigo: "#858585", imagenes: [4] },
-            { nombre: "Negro", codigo: "#050505", imagenes: [5, 6, 7, 8] },
-            { nombre: "Marron", codigo: "#795548", imagenes: [9, 10, 11] }
-        ],
-        video: "productos/remera-boxy/video.mp4",
-        descripcion: "Remera oversize de algodón pesado 100%. Corte boxy, hombros caídos y cuello cerrado. Una pieza pensada para combinar con pantalones baggy, cargos o denim."
-    },
-    {
-        id: 2,
-        nombre: "Remeron (OVERSIZE)",
-        precio: "$15.000",
-        imagenes: [
-            "productos/remeron-oversize/remeron-blanco.jpeg",
-            "productos/remeron-oversize/remeron-marron.jpeg",
-            "productos/remeron-oversize/remeron-negro.jpeg"
-        ],
-        colores: [
-            { nombre: "Blanco", codigo: "#f2f2f2", imagenes: [0] },
-            { nombre: "Marron", codigo: "#795548", imagenes: [1] },
-            { nombre: "Negro", codigo: "#050505", imagenes: [2] }
-        ],
-        video: "productos/remeron-oversize/video.mp4",
-        descripcion: "Hoodie de corte oversize con interior frizado. Capucha amplia, mangas voluminosas y bolsillo frontal. Diseñado para un fit relajado."
-    },
-    {
-        id: 3,
-        nombre: "Campera",
-        precio: "$25.000",
-        imagenes: [
-            "productos/campera/campera-denim-azul.webp"
-        ],
-        colores: [],
-        video: "productos/campera/video.mp4",
-        descripcion: "Campera oversize de denim con lavado vintage y hombros caídos."
-    },
-    {
-        id: 4,
-        nombre: "Buzo BOXY",
-        precio: "$20.000",
-        imagenes: [
-            "productos/buzo-boxy/buzo-boxy-amarillo-tribal.jpeg",
-            "productos/buzo-boxy/buzo-boxy-gris.jpeg",
-            "productos/buzo-boxy/buzo-boxy-negro-cruz.jpeg",
-            "productos/buzo-boxy/buzo-boxy-negro-tribal-01.jpeg",
-            "productos/buzo-boxy/buzo-boxy-negro-tribal-02.jpeg",
-            "productos/buzo-boxy/buzo-boxy-negro-tribal-03.jpeg"
-        ],
-        colores: [
-            { nombre: "Amarillo tribal", codigo: "#d5a521", imagenes: [0] },
-            { nombre: "Gris espina", codigo: "#858585", imagenes: [1] },
-            { nombre: "Negro cruz", codigo: "#050505", imagenes: [2] },
-            { nombre: "Negro triba simple", codigo: "#1b1b1b", imagenes: [3] },
-            { nombre: "Negro tribal", codigo: "#2e2e2e", imagenes: [4] },
-            { nombre: "Negro", codigo: "#000000", imagenes: [5] }
-        ],
-        video: "productos/buzo-boxy/video.mp4",
-        descripcion: "Buzo de corte boxy, cómodo y de silueta amplia."
-    },
-    {
-        id: 5,
-        nombre: "Buzo oversize",
-        precio: "$22.000",
-        imagenes: [
-            "productos/buzo-oversize/buzo-oversize-gris.avif"
-        ],
-        colores: [],
-        video: "productos/buzo-oversize/video.mp4",
-        descripcion: "Buzo oversize de calce relajado y volumen amplio."
-    }
-];
-
 /* ==================================
    ELEMENTOS
 ================================== */
+
+let productos = [];
 
 // Referencias a elementos existentes en el HTML. Guardarlas en
 // constantes permite actualizar la interfaz desde JavaScript sin
@@ -151,7 +53,7 @@ let productoActual = null;
 let imagenActual = 0;
 let imagenesVisibles = [];
 
-// El carrito se recupera al cargar la pagina desde localStorage.
+// El carrito se recupera al  la pagina desde localStorage.
 // Si no existe una compra anterior, se inicia con un array vacio.
 // localStorage pertenece a este navegador y a este dominio; no es una
 // base de datos del servidor.
@@ -166,14 +68,15 @@ let carrito = JSON.parse(
 // Se recorre el catalogo y se crea una tarjeta HTML por cada producto.
 // La tarjeta usa la primera imagen como portada y muestra nombre,
 // precio y cantidad de colores disponibles.
-productos.forEach(producto => {
+function crearTarjeta(producto) {
     const card = document.createElement("article");
     card.classList.add("product-card");
+    const imagenPrincipal = producto.imagenes[0] || "";
 
     card.innerHTML = `
         <div class="card-image-container">
             <img
-                src="${producto.imagenes[0]}"
+                src="${imagenPrincipal}"
                 alt="${producto.nombre}"
                 class="product-image">
             <div class="view-product">
@@ -203,7 +106,60 @@ productos.forEach(producto => {
     );
 
     catalog.appendChild(card);
-});
+}
+async function cargarProductos() {
+    catalog.innerHTML = "<p>Cargando productos...</p>";
+
+    const { data, error } = await supabase
+        .from("products")
+        .select(`
+            product_id,
+            name,
+            description,
+            price,
+            products_images (
+                url,
+                gallery_position
+            )
+        `)
+        .order("product_id");
+
+    if (error) {
+        catalog.innerHTML = `<p>❌ ERROR: ${error.message}</p>`;
+        console.error(error);
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        catalog.innerHTML = "<p>No hay productos.</p>";
+        return;
+    }
+
+    console.log("PRODUCTOS CON IMÁGENES:", data);
+
+    productos = data.map(producto => ({
+        id: producto.product_id,
+        nombre: producto.name,
+        precio: `$${Number(producto.price).toLocaleString("es-AR")}`,
+        descripcion: producto.description || "",
+
+        imagenes: (producto.products_images || [])
+            .sort((a, b) => a.gallery_position - b.gallery_position)
+            .map(imagen => imagen.url),
+
+        colores: [],
+        video: ""
+    }));
+
+    catalog.innerHTML = "";
+
+    productos.forEach(crearTarjeta);
+}
+
+cargarProductos();
+
+
+
 
 /* ==================================
    ABRIR PRODUCTO
@@ -444,6 +400,8 @@ function addToCart() {
     openCart();
 }
 
+window.addToCart = addToCart;
+
 // Convierte el array del carrito a JSON y lo guarda bajo una clave fija.
 // JSON permite almacenar arrays y objetos en localStorage, que guarda
 // solamente texto.
@@ -584,3 +542,5 @@ document
 // Primera renderizacion: muestra el carrito recuperado o su estado vacio
 // apenas termina de cargar el script.
 renderCart();
+
+})();
